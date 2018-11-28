@@ -8,6 +8,7 @@ finds the shortest path from a source to every other vertex. With the following 
 * p evenly divides n
 
 The work can be divided among the multiple processors as follows:
+
     * Process 0    :  Vertices *0, 1, ..., (n / p) - 1*
     * Process 1    :  Vertices *(n / p), (n / p) + 1, ..., 2 * (n / p) - 1*
     *                     :      ...
