@@ -17,9 +17,9 @@ The work can be divided among the multiple processes as follows:
 If we consider the graph below and we would like to comput the shortest path from A to F
 So when the program is run with p = 3 (3 processes), the vertices get distributed as follows:
 
-* Process 0     : Vertice A, B
-* Process 1     : Vertice C, D
-* Process 2     : Vertice E, F
+* Process 0     : Vertices A, B
+* Process 1     : Vertices C, D
+* Process 2     : Vertices E, F
 
 Then each process checks for their local minimum distance from their local source vertex
 to all vertices assigned to that process:
@@ -41,6 +41,8 @@ C   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/im
 D   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | 0 | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | 11
 E   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | 4 | 0 | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg)
 F   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | 0
+
+## More to come..
 
 ![Graph](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/graph.jpg)
 
