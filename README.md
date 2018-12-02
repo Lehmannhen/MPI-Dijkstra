@@ -2,7 +2,19 @@
 
 This is a parallel implementation of Dijkstras shortest path algorithm for
 a weighted directed graph given as an adjaceny matrix. Dijkstras algorithm
-finds the shortest path from a source to every other vertex. With the following conditions:
+finds the shortest path from a source to every other vertex.
+
+![Graph](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/graph.jpg)
+
+Below is an example run of the shortest path from A to every other vertex in the graph above. The blue arrows in the graph is the shortest path from A to F.
+In the program A, B, C, D, E and F corresponds to 0, 1, 2, 3, 4 and 5 respectively.
+
+![terminal](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/tty.gif)
+
+The bottom of dist 0->v shows that the computed path to F (5) is of length 20.
+
+
+With the following conditions:
 * n = the number of vertices
 * p = the number of processes
 * p evenly divides n
@@ -42,9 +54,8 @@ D   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/im
 E   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | 4 | 0 | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg)
 F   | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | 0
 
-## More to come..
+## TODO: add more explanation of algorithm....
 
-![Graph](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/graph.jpg)
 
 
 
