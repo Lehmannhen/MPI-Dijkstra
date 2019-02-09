@@ -27,6 +27,8 @@ The work can be divided among the multiple processes as follows:
 * Process p - 1:  Vertices *(p - 1) * (n / p), (p - 1) * (n / p) + 1, ..., p * (n / p) - 1 = n - 1*
 
 If we consider the graph in (adjacency matrix form) below:
+
+
 u, v | A | B | C | D | E | F
 ---    | - | - | - | - | - | -
 A   | 0 | 4 | 2 | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg) | ![inf](https://raw.githubusercontent.com/Lehmannhen/MPI-Dijkstra/master/images/inf.jpg)
@@ -70,4 +72,3 @@ So in the example the matrix mat looks like :
 
 ## ----------------- Reference to image -----------------
 By Artyom Kalinin - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=29980338
-
