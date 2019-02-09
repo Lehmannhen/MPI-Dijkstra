@@ -44,6 +44,8 @@ then if we would like to compute the shortest path from A to F with 3 processes 
 * Process 1     : Gets column 2 and 3 (col C and col D)
 * Process 2     : Gets column 4 and 5 (col E and col F)
 
+By doing a column partition of the matrix then each process gets responsible for all incoming edges to their assigned vertices.
+
 Then each process checks for their local minimum distance from their local source vertex
 to all vertices assigned to that process:
 
@@ -68,3 +70,4 @@ So in the example the matrix mat looks like :
 
 ## ----------------- Reference to image -----------------
 By Artyom Kalinin - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=29980338
+
