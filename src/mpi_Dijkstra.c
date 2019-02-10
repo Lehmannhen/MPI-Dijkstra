@@ -46,7 +46,7 @@ void Dijkstra_Init(int loc_mat[], int loc_pred[], int loc_dist[], int loc_known[
 void Dijkstra(int loc_mat[], int loc_dist[], int loc_pred[], int loc_n, int n,
               MPI_Comm comm);
 int Find_min_dist(int loc_dist[], int loc_known[], int loc_n);
-void Print_matrix(int global_mat[], int n);
+void Print_matrix(int global_mat[], int rows, int cols);
 void Print_dists(int global_dist[], int n);
 void Print_paths(int global_pred[], int n);
 
@@ -107,12 +107,13 @@ int main(int argc, char **argv) {
  * Ret val:   n:  the number of rows in the matrix
  */
 int Read_n(int my_rank, MPI_Comm comm) {
-   int n;
+    int n;
 
-   if (my_rank == 0)
-      scanf("%d", &n);
-   MPI_Bcast(&n, 1, MPI_INT, 0, comm);
-   return n;
+    if (my_rank == 0)
+        scanf("%d", &n);
+
+    MPI_Bcast(&n, 1, MPI_INT, 0, comm);
+    return n;
 }
 
 
@@ -149,7 +150,7 @@ MPI_Datatype Build_blk_col_type(int n, int loc_n) {
     MPI_Type_free(&block_mpi_t);
     MPI_Type_free(&first_bc_mpi_t);
 
-   return blk_col_mpi_t;
+    return blk_col_mpi_t;
 }
 
 
@@ -182,8 +183,7 @@ void Read_matrix(int loc_mat[], int n, int loc_n,
                 scanf("%d", &mat[i * n + j]);
     }
 
-    MPI_Scatter(mat, 1, blk_col_mpi_t,
-                loc_mat, n * loc_n, MPI_INT, 0, comm);
+    MPI_Scatter(mat, 1, blk_col_mpi_t, loc_mat, n * loc_n, MPI_INT, 0, comm);
 
     if (my_rank == 0) free(mat);
 }
@@ -210,7 +210,6 @@ void Read_matrix(int loc_mat[], int n, int loc_n,
  */
 void Dijkstra_Init(int loc_mat[], int loc_pred[], int loc_dist[], int loc_known[],
                    int my_rank, int loc_n) {
-
     int loc_v;
 
     if (my_rank == 0)
@@ -268,7 +267,8 @@ void Dijkstra(int loc_mat[], int loc_dist[], int loc_pred[], int loc_n, int n,
         if (loc_u != -1) {
             my_min[0] = loc_dist[loc_u];
             my_min[1] = loc_u + my_rank * loc_n;
-        } else {
+        }
+        else {
             my_min[0] = INFINITY;
             my_min[1] = -1;
         }
@@ -355,19 +355,23 @@ int Find_min_dist(int loc_dist[], int loc_known[], int loc_n) {
 /*-------------------------------------------------------------------
  * Function:  Print_matrix
  * Purpose:   Print the contents of the matrix
- * In args:   mat, n
+ * In args:   mat, rows, cols
+ *
+ *
  */
-void Print_matrix(int global_mat[], int n) {
-   int i, j;
+void Print_matrix(int mat[], int rows, int cols) {
+    int i, j;
 
-   for (i = 0; i < n; i++) {
-      for (j = 0; j < n; j++)
-         if (global_mat[i * n + j] == INFINITY)
-            printf("i ");
-         else
-            printf("%d ", global_mat[i * n + j]);
-      printf("\n");
-   }
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < rows; j++)
+            if (mat[i * cols + j] == INFINITY)
+                printf("i ");
+            else
+                printf("%d ", mat[i * cols + j]);
+        printf("\n");
+    }
+
+    printf("\n");
 }
 
 
@@ -384,14 +388,19 @@ void Print_matrix(int global_mat[], int n) {
  *                 is the length of the shortest path 0->v
  */
 void Print_dists(int global_dist[], int n) {
-   int v;
+    int v;
 
-   printf("  v    dist 0->v\n");
-   printf("----   ---------\n");
+    printf("  v    dist 0->v\n");
+    printf("----   ---------\n");
 
-   for (v = 1; v < n; v++)
-      printf("%3d       %4d\n", v, global_dist[v]);
-   printf("\n");
+    for (v = 1; v < n; v++) {
+        if (global_dist[v] == INFINITY) {
+            printf("%3d       %5s\n", v, "inf");
+        }
+        else
+            printf("%3d       %4d\n", v, global_dist[v]);
+        }
+    printf("\n");
 }
 
 
@@ -407,26 +416,26 @@ void Print_dists(int global_dist[], int n) {
  *                 u precedes v on the shortest path 0->v
  */
 void Print_paths(int global_pred[], int n) {
-   int v, w, *path, count, i;
+    int v, w, *path, count, i;
 
-   path =  malloc(n * sizeof(int));
+    path =  malloc(n * sizeof(int));
 
-   printf("  v     Path 0->v\n");
-   printf("----    ---------\n");
-   for (v = 1; v < n; v++) {
-      printf("%3d:    ", v);
-      count = 0;
-      w = v;
-      while (w != 0) {
-         path[count] = w;
-         count++;
-         w = global_pred[w];
-      }
-      printf("0 ");
-      for (i = count-1; i >= 0; i--)
-         printf("%d ", path[i]);
-      printf("\n");
-   }
+    printf("  v     Path 0->v\n");
+    printf("----    ---------\n");
+    for (v = 1; v < n; v++) {
+        printf("%3d:    ", v);
+        count = 0;
+        w = v;
+        while (w != 0) {
+            path[count] = w;
+            count++;
+            w = global_pred[w];
+        }
+        printf("0 ");
+        for (i = count-1; i >= 0; i--)
+            printf("%d ", path[i]);
+        printf("\n");
+    }
 
-   free(path);
+    free(path);
 }
