@@ -1,6 +1,12 @@
 # Dijkstras shortest path using MPI
 
-This is a parallel implementation of Dijkstras shortest path algorithm for
+#### Prerequisites
+In order to run this program you need to
+install **Open MPI** : here are [instructions](https://wiki.helsinki.fi/display/hugg/open+mpi+install+on+mac+os+x) on how to do it on a mac.
+
+
+#### Program explanation
+This is a parallel implementation of Dijkstra's shortest path algorithm for
 a weighted directed graph given as an adjaceny matrix. Dijkstras algorithm
 finds the shortest path from a source to every other vertex.
 
